@@ -1,0 +1,64 @@
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  background: #000;
+  overflow: hidden;
+}
+
+black-hole {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+black-hole canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.astronaut-float {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  z-index: 10;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+}
+
+/* Animate wrapper only — avoids transform + filter bugs on transparent PNGs in Safari */
+.astronaut-float__bob {
+  animation: astronaut-float 5.5s ease-in-out infinite;
+  will-change: transform;
+}
+
+.astronaut-float__img {
+  display: block;
+  width: clamp(140px, 20vw, 240px);
+  height: auto;
+  max-height: min(48vh, 420px);
+  object-fit: contain;
+  object-position: center;
+  background: transparent;
+  /* drop-shadow on PNGs often shows halos on soft edges; keep separation via z-index only */
+}
+
+@keyframes astronaut-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-22px);
+  }
+}
